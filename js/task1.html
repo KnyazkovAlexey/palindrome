@@ -1,0 +1,96 @@
+<h1>Замена каждой буквы на следующую по алфавиту</h1>
+
+<input type="text" id="userText" placeholder="Текст для замены"><br><br>
+
+<button id="replaceButton">Заменить</button><br><br>
+
+<pre id="answer"></pre>
+
+<script>
+	document.getElementById('replaceButton').onclick = function() {
+		showAnswer();
+	};
+
+	/**
+	 * Обработка введённых данных, формирование и показ ответа.
+	 *
+	 * @returns {boolean}
+	 */
+	function showAnswer() {
+		let userText = document.getElementById('userText').value;
+
+		if ('' === userText.trim()) {
+			document.getElementById('answer').innerText = 'Введите какой-то текст';
+
+			return false;
+		}
+
+		document.getElementById('answer').innerText = 'Результат: ' + replaceLetters(userText);
+
+		return true;
+	}
+
+	/**
+	 * Замена каждой буквы на следующую по алфавиту.
+	 *
+	 * @param {string} someText
+	 * @returns {string}
+	 */
+	function replaceLetters(someText) {
+		let resultText = '';
+
+		for (let i = 0; i < someText.length; i++) {
+			let charCode = someText.charCodeAt(i);
+
+			if (isLetter(charCode)) {
+				resultText += getNextLetter(charCode);
+			} else {
+				resultText += someText[i];
+			}
+		}
+
+		return resultText;
+	}
+
+	/**
+	 * Получение следующей буквы по алфавиту.
+	 *
+	 * @param {number} charCode
+	 * @returns {string}
+	 */
+	function getNextLetter(charCode) {
+		switch (charCode) {
+			case 122: //z
+				return 'a';
+			case 90: //Z
+				return 'A';
+			case 1077: //е
+				return 'ё';
+			case 1045: //Е
+				return 'Ё';
+			case 1105: //ё
+				return 'ж';
+			case 1025: //Ё
+				return 'Ж';
+			case 1103: //я
+				return 'а';
+			case 1071: //Я
+				return 'А';
+			default:
+				return String.fromCharCode(charCode + 1);
+		}
+	}
+
+	/**
+	 * Проверка, что символ является буквой (русской или латинской).
+	 *
+	 * @param {number} charCode
+	 * @returns {boolean}
+	 */
+	function isLetter(charCode) {
+		let isLatinLetter = charCode >= 65 && charCode <= 122;
+		let isRusLetter =  (charCode >= 1040 && charCode <= 1103) || (charCode === 1025) || (charCode === 1105);
+
+		return isLatinLetter || isRusLetter;
+	}
+</script>

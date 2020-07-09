@@ -1,0 +1,66 @@
+<h1>Достраивание палиндрома</h1>
+
+<input type="text" id="userText" placeholder="Начало палиндрома"><br><br>
+
+<button id="buildButton">Достроить</button><br><br>
+
+<pre id="answer"></pre>
+
+<script>
+	document.getElementById('buildButton').onclick = function() {
+		showAnswer();
+	};
+
+	/**
+     * Обработка введённых данных, формирование и показ ответа.
+	 *
+	 * @returns {boolean}
+	 */
+	function showAnswer() {
+        let userText = document.getElementById('userText').value;
+
+        if ('' === userText.trim()) {
+            document.getElementById('answer').innerText = 'Введите какой-то текст';
+
+            return false;
+        }
+
+		document.getElementById('answer').innerText = 'Результат: ' + completePalindrome(userText);
+
+		return true;
+	}
+
+	/**
+	 * Достраивание строки до минимально возможного палиндрома
+	 *
+	 * @param {string} someText
+	 * @returns {string}
+	 */
+	function completePalindrome(someText) {
+        let str = someText.toLowerCase().replace(/\s/g, '');
+
+        if ('' === str) {
+            return str;
+        }
+
+        let leftChars = [];
+
+	    while (!isPalindrome(str)) {
+            leftChars.push(str[0]);
+
+            str = str.substr(1);
+        }
+
+		return leftChars.join('') + str + leftChars.reverse().join('');
+	}
+
+    /**
+     * Проверка, является ли строка палиндромом
+     *
+     * @param {string} str
+     * @returns {boolean}
+     */
+    function isPalindrome(str) {
+        return str === str.split('').reverse().join('');
+    }
+</script>

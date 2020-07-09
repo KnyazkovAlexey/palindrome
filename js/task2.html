@@ -1,0 +1,62 @@
+<h1>Сколько дней осталось до Рождества</h1>
+
+<input type="date" id="userDate"><br><br>
+
+<button id="calcButton">Рассчитать</button><br><br>
+
+<pre id="answer"></pre>
+
+<script>
+	document.getElementById('calcButton').onclick = function() {
+		showAnswer();
+	};
+
+	/**
+     * Обработка введённых данных, формирование и показ ответа.
+	 *
+	 * @returns {boolean}
+	 */
+	function showAnswer() {
+		let userDate = new Date(document.getElementById('userDate').value);
+
+		if (!isValidDate(userDate)) {
+			document.getElementById('answer').innerText = 'Укажите корректную дату';
+
+			return false;
+		}
+
+		document.getElementById('answer').innerText = 'Результат: ' + calcDaysBeforeChristmas(userDate);
+
+		return true;
+	}
+
+	/**
+	 * Рассчёт количества оставшихся дней до следующего Рождества.
+	 *
+	 * @param {Date} currentDate
+	 * @returns {number}
+	 */
+	function calcDaysBeforeChristmas(currentDate) {
+		let year = currentDate.getFullYear();
+
+		if (currentDate.getMonth() > 0 || currentDate.getDate() > 7) {
+			year++;
+		}
+
+		let christmasDate = new Date(year, 0, 7);
+
+		let msPerDay = 24 * 60 * 60 * 1000;
+
+		return Math.round((christmasDate.getTime() - currentDate.getTime()) / msPerDay);
+	}
+
+	/**
+	 * Проверка валидности даты.
+	 *
+	 * @param {*} someDate
+	 * @returns {boolean}
+	 */
+	function isValidDate(someDate) {
+		return someDate instanceof Date && !isNaN(someDate);
+	}
+</script>

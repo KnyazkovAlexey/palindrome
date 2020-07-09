@@ -3,10 +3,7 @@
     <br>
 </p>
 
-<p align="center">
-    <h2 align="center">PHP</h2>
-    <br>
-</p>
+<h2>PHP</h2>
 
 <pre>
 В каком виде хотелось бы получить решение каждой заачи:
@@ -45,10 +42,7 @@ $array[6] = 2;
     [6] => 2           
 </pre>
 
-<p align="center">
-    <h2 align="center">JS</h2>
-    <br>
-</p>
+<h2>JS</h2>
 
 <pre>
     В каком виде хотелось бы получить решение каждой заачи:
@@ -86,10 +80,7 @@ $array[6] = 2;
     1221
 </pre>
 
-<p align="center">
-    <h2 align="center">SQL</h2>
-    <br>
-</p>
+<h2>SQL</h2>
 
 <pre>
 https://www.w3resource.com/sql-exercises/movie-database-exercise/joins-exercises-on-movie-database.php
